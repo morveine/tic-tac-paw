@@ -42,6 +42,20 @@ body {
     padding: 20px;
 }
 
+.tile>img {
+    animation-name: pawTap; 
+    animation-duration: 0.5s;
+}
+
+@keyframes pawTap {
+    from {
+      transform: scale(0);
+    }
+    to {
+      transform: scale(1);
+    }
+  }
+
 h1 {
     font-size: 3rem;
 }
@@ -49,6 +63,7 @@ h1 {
 .winner {
     font-size: 1.5rem;
 }
+
 
 /* github-corner */
 
