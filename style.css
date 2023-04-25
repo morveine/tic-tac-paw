@@ -1,0 +1,85 @@
+/* reset */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* variables */
+
+:root {
+    --bg: #f6f6f6;
+    --accent-pink-1: #ffe2e2;
+    --accent-pink-2: #ffc7c7;
+    --dark-grey: #787878;
+}
+
+/* style */
+
+body {
+    font-family: 'Merienda', cursive;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--dark-grey);
+    height: 100vh;
+    padding: 30px 0;
+}
+
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 3px solid var(--accent-pink-2);
+}
+
+.tile {
+    border: 1px solid var(--accent-pink-1);
+    height: 10rem;
+    aspect-ratio: 1/1;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 3rem;
+}
+
+.winner {
+    font-size: 1.5rem;
+}
+
+/* github-corner */
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out
+}
+
+@keyframes octocat-wave {
+
+    0%,
+    100% {
+        transform: rotate(0)
+    }
+
+    20%,
+    60% {
+        transform: rotate(-25deg)
+    }
+
+    40%,
+    80% {
+        transform: rotate(10deg)
+    }
+}
+
+@media (max-width:500px) {
+    .github-corner:hover .octo-arm {
+        animation: none
+    }
+
+    .github-corner .octo-arm {
+        animation: octocat-wave 560ms ease-in-out
+    }
+}
