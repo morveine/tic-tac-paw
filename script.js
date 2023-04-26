@@ -1,8 +1,14 @@
 const gameboard = document.querySelector('.gameboard');
+const restartButton = document.getElementById('restart-button');
+const restartScreen = document.querySelector('.restart-screen');
+const winnerSpan = document.getElementById('winner-cat');
+const winnerText = document.querySelector('.winner');
 const boardState = Array(3).fill(null).map(() => Array(3).fill(null));
+const gameTile = Array.from(document.querySelectorAll('.tile'));
 let turn = 'x';
 
 gameboard.addEventListener('click', placeMark);
+restartButton.addEventListener('click', restartGame);
 
 function placeMark(e) {
     const tile = e.target;
@@ -14,6 +20,7 @@ function placeMark(e) {
 
     boardState[rowIndex][colIndex] = turn;
 
+    img.classList.add('paw');
     if (turn === 'x') {
         img.src = 'white.svg';
     } else {
@@ -25,54 +32,69 @@ function placeMark(e) {
     img.style.rotate = (random * plusOrMinus) + 'deg';
     tile.appendChild(img);
 
-    toggleState();
-    checkForWin();
-}
-
-function toggleState() {
     if (turn === 'x') {
         turn = 'o';
     } else {
         turn = 'x';
     }
+
+    checkForWin();
 }
 
 function checkForWin() {
-    let winner = '';
-    for (let col = 0; col < 3; col++) {
+    let winner = null;
+
+    for (let i = 0; i < 3; i++) {
+        if (boardState[i][0] !== null && boardState[i].every(val => val === boardState[i][0])) {
+            winner = boardState[i][0]; // horizontal
+        } else if (boardState[0][i] !== null && boardState.every(row => row[i] === boardState[0][i])) {
+            winner = boardState[0][i]; // vertical
+        }
+    }
+
+    const centerVal = boardState[1][1];
+    if (centerVal !== null) {
         if (
-            boardState[0][col] !== null &&
-            boardState[0][col] === boardState[1][col] &&
-            boardState[1][col] === boardState[2][col]
+            boardState[0][0] === centerVal && centerVal === boardState[2][2] ||
+            boardState[0][2] === centerVal && centerVal === boardState[2][0]
         ) {
-            winner = boardState[0][col];
-            return true; //vertical
+            winner = centerVal;
         }
     }
-    const allEqual = arr => arr.every(v => v !== null && v === arr[0]);
-    for (arr of boardState) {
-        if (allEqual(arr)) {
-            winner = arr[0];
-            return true; //horizontal
-        }
+
+    if (!winner && boardState.every(row => row.every(cell => cell !== null))) {
+        winner = "tie";
     }
-    if (
-        boardState[0][0] !== null &&
-        boardState[1][1] === boardState[0][0] &&
-        boardState[2][2] === boardState[1][1] 
-        ||
-        boardState[0][2] !== null &&
-        boardState[1][1] === boardState[0][2] &&
-        boardState[2][0] === boardState[1][1]
-    ) {
-        winner = boardState[1][1];
-        return true;
-    }
-    return false;
+
+    return getWinner(winner);
 }
 
-function restartGame() { }
 
-// function that checks if somebody won (loop over the array)
+function getWinner(winner) {
+    if (winner) {
+        winnerText.classList.remove('hide');
+        restartScreen.classList.remove('hide');
+    }
+    if (winner === 'tie') {
+        winnerSpan.textContent = `friendship`;
 
-// function that clears the board
+    } else if (winner === 'x') {
+        winnerSpan.textContent = 'white';
+
+    } else if (winner === 'o') {
+        winnerSpan.textContent = 'blue';
+    }
+
+}
+
+
+function restartGame() {
+    restartScreen.classList.add('hide');
+    winnerText.classList.add('hide');
+    for (let i = 0; i < boardState.length; i++) {
+        for (let j = 0; j < boardState[i].length; j++) {
+            boardState[i][j] = null;
+        }
+    }
+    gameTile.forEach(tile => tile.querySelector("img")?.remove());
+}
