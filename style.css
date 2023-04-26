@@ -11,6 +11,7 @@
 :root {
     --bg: #f6f6f6;
     --accent-pink-1: #ffe2e2;
+    --accent-pink-1-transparent: #ffe2e272;
     --accent-pink-2: #ffc7c7;
     --dark-grey: #787878;
 }
@@ -29,6 +30,38 @@ body {
     padding: 30px 0;
 }
 
+.main-wrapper {
+    position: relative;
+}
+
+.restart-screen {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: var(--accent-pink-1-transparent);
+    z-index: 1;
+    backdrop-filter: blur(2px);
+    /* display: none; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#restart-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--dark-grey);
+    background-color: transparent;
+    font-family: 'Merienda', cursive;
+    cursor: pointer;
+    padding: 10px;
+    border: 3px solid var(--dark-grey);
+    gap: 5px;
+}
+
 .gameboard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -43,18 +76,19 @@ body {
 }
 
 .tile>img {
-    animation-name: pawTap; 
+    animation-name: pawTap;
     animation-duration: 0.5s;
 }
 
 @keyframes pawTap {
     from {
-      transform: scale(0);
+        transform: scale(0);
     }
+
     to {
-      transform: scale(1);
+        transform: scale(1);
     }
-  }
+}
 
 h1 {
     font-size: 3rem;
