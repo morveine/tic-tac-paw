@@ -11,7 +11,7 @@
 :root {
     --bg: #f6f6f6;
     --accent-pink-1: #ffe2e2;
-    --accent-pink-1-transparent: #ffe2e272;
+    --accent-pink-1-transparent: #af969672;
     --accent-pink-2: #ffc7c7;
     --dark-grey: #787878;
 }
@@ -41,7 +41,6 @@ body {
     background-color: var(--accent-pink-1-transparent);
     z-index: 1;
     backdrop-filter: blur(2px);
-    /* display: none; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,19 +52,22 @@ body {
     align-items: center;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--dark-grey);
+    color: var(--bg);
     background-color: transparent;
     font-family: 'Merienda', cursive;
     cursor: pointer;
     padding: 10px;
-    border: 3px solid var(--dark-grey);
+    border: 3px solid var(--bg);
     gap: 5px;
+    border-radius: 5px;
 }
+
 
 .gameboard {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     border: 3px solid var(--accent-pink-2);
+    border-radius: 5px;
 }
 
 .tile {
@@ -96,6 +98,10 @@ h1 {
 
 .winner {
     font-size: 1.5rem;
+}
+
+.hide {
+    visibility: hidden;
 }
 
 
