@@ -80,6 +80,7 @@ body {
 .tile>img {
     animation-name: pawTap;
     animation-duration: 0.5s;
+    user-select: none;
 }
 
 @keyframes pawTap {
