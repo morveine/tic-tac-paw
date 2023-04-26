@@ -22,9 +22,9 @@ function placeMark(e) {
 
     img.classList.add('paw');
     if (turn === 'x') {
-        img.src = 'white.svg';
+        img.src = 'img/white.svg';
     } else {
-        img.src = 'black.svg';
+        img.src = 'img/black.svg';
     }
 
     const plusOrMinus = Math.random() < 0.5 ? -1 : 1;
@@ -58,7 +58,7 @@ function checkForWin() {
             boardState[0][0] === centerVal && centerVal === boardState[2][2] ||
             boardState[0][2] === centerVal && centerVal === boardState[2][0]
         ) {
-            winner = centerVal;
+            winner = centerVal; // diagonal
         }
     }
 
